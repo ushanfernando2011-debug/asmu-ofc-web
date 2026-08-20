@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASMU - Ananda Sastralaya Media Unit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans+Sinhala:wght@300;400;500;600;700&family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+    darkMode: 'class',
+    theme: {
+        extend: {
+            colors: {
+                maroon: { 50: '#fdf2f2', 100: '#fde8e8', 200: '#fbd0d0', 300: '#f8a9a9', 400: '#f27878', 500: '#e84c4c', 600: '#d42e2e', 700: '#b22222', 800: '#8b1a1a', 900: '#721515', 950: '#3f0a0a' },
+                gold: { 50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', 800: '#92400e', 900: '#78350f', 950: '#451a03' },
+            },
+            fontFamily: {
+                sans: ['Poppins', 'Noto Sans Sinhala', 'Noto Sans Tamil', 'sans-serif'],
+            }
+        }
+    }
+}
+</script>
+<style>
+:root { --maroon: #8B0000; --gold: #FFD700; --maroon-light: #B22222; --gold-light: #FFC107; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', 'Noto Sans Sinhala', 'Noto Sans Tamil', sans-serif; overflow-x: hidden; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+.dark ::-webkit-scrollbar-track { background: #1a1a1a; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--gold), var(--maroon)); border-radius: 5px; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+@keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(255,215,0,0.3); } 50% { box-shadow: 0 0 40px rgba(255,215,0,0.6); } }
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes bounce-gentle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes countPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes spin-loader { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+.animate-fadeInLeft { animation: fadeInLeft 0.8s ease-out forwards; opacity: 0; }
+.animate-fadeInRight { animation: fadeInRight 0.8s ease-out forwards; opacity: 0; }
+.animate-scaleIn { animation: scaleIn 0.6s ease-out forwards; opacity: 0; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+.animate-bounce-gentle { animation: bounce-gentle 2s ease-in-out infinite; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+.glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); }
+.dark .glass { background: rgba(30, 30, 30, 0.95); border: 1px solid rgba(255, 255, 255, 0.1); }
+.glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+.dark .glass-card { background: rgba(40, 40, 40, 0.9); border: 1px solid rgba(255, 255, 255, 0.1); }
+.glass-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 25px 50px rgba(139, 0, 0, 0.15); }
+
+.logo-circle { border-radius: 50%; border: 2px solid var(--maroon); box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.4s ease; object-fit: cover; }
+.logo-circle:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(139, 0, 0, 0.25); }
+
+.btn-primary { background: linear-gradient(135deg, var(--maroon), var(--maroon-light)); color: white; padding: 14px 32px; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; position: relative; overflow: hidden; border: 2px solid transparent; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
+.btn-primary:hover::before { left: 100%; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4); border-color: var(--gold); }
+.btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--maroon); padding: 14px 32px; border-radius: 50px; font-weight: 700; transition: all 0.3s ease; border: 2px solid transparent; display: inline-flex; align-items: center; gap: 8px; }
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); border-color: var(--maroon); }
+
+.hero-bg { background: linear-gradient(135deg, #ffffff 0%, #fff9f0 50%, #ffffff 100%); position: relative; overflow: hidden; }
+.dark .hero-bg { background: linear-gradient(135deg, #1a0505 0%, #1a1500 50%, #0a0a0a 100%); }
+.hero-bg::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,215,0,0.08) 0%, transparent 70%); border-radius: 50%; animation: float 6s ease-in-out infinite; }
+.hero-bg::after { content: ''; position: absolute; bottom: -30%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(139,0,0,0.05) 0%, transparent 70%); border-radius: 50%; }
+
+.section-divider { height: 3px; background: linear-gradient(90deg, transparent, var(--maroon), var(--gold), var(--maroon), transparent); margin: 0 auto; width: 200px; border-radius: 2px; }
+
+.stat-card { background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85)); border-radius: 20px; padding: 30px; text-align: center; transition: all 0.4s ease; border: 1px solid rgba(139,0,0,0.1); position: relative; overflow: hidden; }
+.dark .stat-card { background: linear-gradient(145deg, rgba(40,40,40,0.95), rgba(30,30,30,0.85)); border: 1px solid rgba(255,255,255,0.1); }
+.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--maroon)); }
+.stat-card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 20px 40px rgba(139, 0, 0, 0.15); }
+.stat-number { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, var(--maroon), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.gallery-item { position: relative; overflow: hidden; border-radius: 16px; cursor: pointer; transition: all 0.4s ease; }
+.gallery-item img { transition: all 0.5s ease; width: 100%; height: 100%; object-fit: cover; }
+.gallery-item:hover img { transform: scale(1.15); }
+.gallery-item .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(139,0,0,0.9), transparent); opacity: 0; transition: all 0.4s ease; display: flex; align-items: flex-end; padding: 20px; }
+.gallery-item:hover .overlay { opacity: 1; }
+
+.countdown-box { background: linear-gradient(135deg, var(--maroon), #5a0000); border-radius: 16px; padding: 20px; text-align: center; min-width: 80px; border: 1px solid var(--gold); animation: countPulse 2s ease-in-out infinite; }
+.countdown-number { font-size: 2.5rem; font-weight: 800; color: var(--gold); line-height: 1; }
+.countdown-label { font-size: 0.85rem; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+
+.nav-link { position: relative; padding: 8px 0; transition: color 0.3s ease; }
+.nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--maroon); transition: width 0.3s ease; }
+.nav-link:hover::after { width: 100%; }
+.nav-link.active { color: var(--maroon); font-weight: 700; }
+.dark .nav-link.active { color: var(--gold); }
+.nav-link.active::after { width: 100%; }
+
+.mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+.mobile-menu.open { transform: translateX(0); }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal-content { background: white; border-radius: 24px; padding: 40px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; transform: scale(0.9) translateY(20px); transition: all 0.3s ease; }
+.dark .modal-content { background: #1a1a1a; color: white; }
+.modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+
+.input-field { width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 12px; font-size: 1rem; transition: all 0.3s ease; background: white; }
+.dark .input-field { background: #2a2a2a; border-color: #444; color: white; }
+.input-field:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2); }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+.social-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: all 0.3s ease; border: 2px solid transparent; }
+.social-icon:hover { transform: translateY(-5px) rotate(10deg); border-color: var(--gold); }
+
+.footer-link { transition: all 0.3s ease; display: inline-block; }
+.footer-link:hover { color: var(--gold); transform: translateX(5px); }
+
+.image-viewer { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+.image-viewer.active { opacity: 1; visibility: visible; }
+.image-viewer img { max-width: 90%; max-height: 90%; border-radius: 12px; transform: scale(0.8); transition: transform 0.3s ease; }
+.image-viewer.active img { transform: scale(1); }
+
+/* Language Switcher - Click Based */
+.lang-switcher { position: relative; }
+.lang-btn { display: flex; align-items: center; gap: 2px; padding: 8px 12px; border-radius: 50px; background: rgba(139,0,0,0.08); border: 1px solid rgba(139,0,0,0.15); cursor: pointer; transition: all 0.3s ease; }
+.dark .lang-btn { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.2); }
+.lang-btn:hover { background: rgba(139,0,0,0.15); }
+.dark .lang-btn:hover { background: rgba(255,215,0,0.2); }
+.lang-btn .lang-flag { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; }
+.lang-btn .lang-text { font-size: 13px; font-weight: 600; color: var(--maroon); }
+.dark .lang-btn .lang-text { color: var(--gold); }
+.lang-dropdown-menu { position: absolute; top: calc(100% + 8px); right: 0; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(-10px) scale(0.95); transition: all 0.25s ease; min-width: 180px; z-index: 100; }
+.dark .lang-dropdown-menu { background: #2a2a2a; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+.lang-dropdown-menu.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.lang-dropdown-item { padding: 12px 16px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+.dark .lang-dropdown-item { border-bottom-color: rgba(255,255,255,0.05); }
+.lang-dropdown-item:last-child { border-bottom: none; }
+.lang-dropdown-item:hover { background: rgba(139,0,0,0.08); }
+.dark .lang-dropdown-item:hover { background: rgba(255,215,0,0.1); }
+.lang-dropdown-item.active { background: rgba(139,0,0,0.12); }
+.dark .lang-dropdown-item.active { background: rgba(255,215,0,0.15); }
+.lang-dropdown-item .lang-flag { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; }
+.lang-dropdown-item .lang-name { font-size: 14px; font-weight: 500; color: #333; }
+.dark .lang-dropdown-item .lang-name { color: #eee; }
+.lang-dropdown-item.active .lang-name { font-weight: 700; color: var(--maroon); }
+.dark .lang-dropdown-item.active .lang-name { color: var(--gold); }
+
+.profile-img-nav { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); cursor: pointer; transition: all 0.3s ease; }
+.profile-img-nav:hover { transform: scale(1.1); box-shadow: 0 0 15px rgba(255,215,0,0.5); }
+
+/* Loading Spinner */
+.loading-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+.loading-overlay.active { opacity: 1; visibility: visible; }
+.loading-spinner { width: 60px; height: 60px; border: 4px solid rgba(255,215,0,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin-loader 1s linear infinite; }
+.loading-text { color: var(--gold); font-size: 1.1rem; font-weight: 600; margin-top: 20px; }
+.loading-subtext { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 8px; }
+
+/* Role Selection */
+.role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.role-option { padding: 12px 8px; border: 2px solid #e5e7eb; border-radius: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease; background: white; }
+.dark .role-option { background: #2a2a2a; border-color: #444; }
+.role-option:hover { border-color: var(--gold); background: rgba(255,215,0,0.05); }
+.role-option.selected { border-color: var(--maroon); background: linear-gradient(135deg, rgba(139,0,0,0.1), rgba(255,215,0,0.1)); }
+.dark .role-option.selected { border-color: var(--gold); }
+.role-option i { font-size: 1.5rem; color: var(--maroon); margin-bottom: 6px; display: block; }
+.dark .role-option i { color: var(--gold); }
+.role-option span { font-size: 0.8rem; font-weight: 600; color: #333; display: block; }
+.dark .role-option span { color: #eee; }
+
+@media (max-width: 768px) { .countdown-number { font-size: 1.8rem; } .countdown-box { min-width: 60px; padding: 12px; } .stat-number { font-size: 2rem; } .role-grid { grid-template-columns: 1fr; } }
+
+.particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.particle { position: absolute; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; opacity: 0.3; animation: float 8s ease-in-out infinite; }
+
+</style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay">
+<div class="loading-spinner"></div>
+<p class="loading-text" id="loadingText">Creating your account...</p>
+<p class="loading-subtext" id="loadingSubtext">Please wait a moment</p>
+</div>
+
+<!-- Image Viewer -->
+<div id="imageViewer" class="image-viewer" onclick="closeImageViewer()">
+<button class="absolute top-6 right-6 text-white text-3xl hover:text-yellow-400 transition-colors z-10"><i class="fas fa-times"></i></button>
+<img id="viewerImage" src="" alt="Gallery Image">
+</div>
+
+<!-- Profile/Login Modal -->
+<div id="profileModal" class="modal-overlay" onclick="if(event.target===this)closeProfileModal()">
+<div class="modal-content">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-2xl font-bold text-maroon-800 dark:text-yellow-400" id="modalTitle" data-lang="login">Login</h2>
+<button onclick="closeProfileModal()" class="text-gray-500 hover:text-maroon-700 text-2xl transition-colors"><i class="fas fa-times"></i></button>
+</div>
+
+<!-- Login Form -->
+<div id="loginForm">
+<div class="text-center mb-6">
+<div class="w-24 h-24 rounded-full bg-gradient-to-br from-maroon-700 to-maroon-900 mx-auto flex items-center justify-center mb-4">
+<i class="fas fa-user-lock text-4xl text-yellow-400"></i>
+</div>
+<p class="text-gray-600 dark:text-gray-300 text-sm" data-lang="login-desc">Login to your ASMU account</p>
+</div>
+<form id="loginFormElement" class="space-y-4" onsubmit="loginUser(event)">
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="username">Username</label>
+<input type="text" id="loginUsername" required class="input-field" placeholder="Enter username">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="password">Password</label>
+<input type="password" id="loginPassword" required class="input-field" placeholder="Enter password">
+</div>
+<button type="submit" class="btn-primary w-full text-center justify-center"><i class="fas fa-sign-in-alt mr-2"></i><span data-lang="login-btn">Login</span></button>
+</form>
+<p class="text-center mt-4 text-sm text-gray-500 dark:text-gray-400">
+<span data-lang="no-account">Don't have an account?</span> <button onclick="showRegister()" class="text-maroon-700 dark:text-yellow-400 font-semibold hover:underline" data-lang="create-account-link">Create Account</button>
+</p>
+</div>
+
+<!-- Register Form -->
+<div id="registerForm" class="hidden">
+<div class="text-center mb-6">
+<div class="w-24 h-24 rounded-full bg-gradient-to-br from-maroon-700 to-maroon-900 mx-auto flex items-center justify-center mb-4">
+<i class="fas fa-user-plus text-4xl text-yellow-400"></i>
+</div>
+<p class="text-gray-600 dark:text-gray-300 text-sm" data-lang="register-desc">Create your ASMU account</p>
+</div>
+<form id="registerFormElement" class="space-y-4" onsubmit="registerUser(event)">
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="profile-photo">Profile Photo</label>
+<input type="file" id="registerPhotoInput" accept="image/*" class="input-field" onchange="previewRegisterPhoto(this)">
+<img id="registerPhotoPreview" class="w-20 h-20 rounded-full object-cover mt-2 hidden border-2 border-maroon-700 mx-auto">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="full-name">Full Name</label>
+<input type="text" id="registerName" required class="input-field" placeholder="Enter your name">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="username">Username</label>
+<input type="text" id="registerUsername" required class="input-field" placeholder="Choose a username (lowercase, no spaces)" oninput="validateUsername(this)">
+<p id="usernameError" class="text-red-500 text-xs mt-1 hidden">Username must be lowercase letters, numbers, underscores or hyphens only (no spaces or capitals)</p>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="password">Password</label>
+<input type="password" id="registerPassword" required class="input-field" placeholder="Choose a password">
+</div>
+
+<!-- Role Selection -->
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-lang="select-role">Select Your Role</label>
+<div class="role-grid">
+<div class="role-option" onclick="selectRole(this, 'teacher')">
+<i class="fas fa-chalkboard-teacher"></i>
+<span data-lang="role-teacher">Teacher</span>
+</div>
+<div class="role-option" onclick="selectRole(this, 'student')">
+<i class="fas fa-user-graduate"></i>
+<span data-lang="role-student">Student</span>
+</div>
+<div class="role-option" onclick="selectRole(this, 'public')">
+<i class="fas fa-users"></i>
+<span data-lang="role-public">Public</span>
+</div>
+</div>
+<input type="hidden" id="registerRole" required>
+</div>
+
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="school">School</label>
+<input type="text" id="registerSchool" value="Ananda Sastralaya" class="input-field" placeholder="Your school">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="index">Index Number</label>
+<input type="text" id="registerIndex" required class="input-field" placeholder="Enter index number" oninput="validateIndexNumber(this)" onkeypress="return isDigitOnly(event)">
+<p id="indexError" class="text-red-500 text-xs mt-1 hidden">Please enter numbers only</p>
+<div class="flex items-center gap-2 mt-2">
+<input type="checkbox" id="noIndexCheckbox" class="w-4 h-4 rounded border-gray-300 text-maroon-700 focus:ring-maroon-700 cursor-pointer" onchange="toggleNoIndex(this)">
+<label for="noIndexCheckbox" class="text-sm text-gray-600 dark:text-gray-300 cursor-pointer select-none">I don't have an index number</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="phone">Phone Number</label>
+<input type="tel" id="registerNumber" required class="input-field" placeholder="Enter phone number" oninput="validatePhoneNumber(this)" onkeypress="return isDigitOnly(event)">
+<p id="phoneError" class="text-red-500 text-xs mt-1 hidden">Please enter numbers only</p>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+<input type="email" id="registerEmail" required class="input-field" placeholder="Enter email">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="town">Town</label>
+<input type="text" id="registerTown" required class="input-field" placeholder="Enter your town">
+</div>
+<button type="submit" class="btn-primary w-full text-center justify-center"><i class="fas fa-user-plus mr-2"></i><span data-lang="create-btn">Create Account</span></button>
+</form>
+<p class="text-center mt-4 text-sm text-gray-500 dark:text-gray-400">
+<span data-lang="have-account">Already have an account?</span> <button onclick="showLogin()" class="text-maroon-700 dark:text-yellow-400 font-semibold hover:underline" data-lang="login-link">Login</button>
+</p>
+</div>
+
+<!-- Profile View -->
+<div id="profileView" class="hidden">
+<div class="text-center mb-6">
+<div class="relative inline-block">
+<img id="profilePhoto" src="" alt="Profile" class="w-28 h-28 rounded-full object-cover border-2 border-maroon-700 mx-auto shadow-lg">
+<div class="absolute bottom-0 right-0 w-8 h-8 bg-green-500 rounded-full border-2 border-white flex items-center justify-center"><i class="fas fa-check text-white text-xs"></i></div>
+</div>
+<h3 id="profileName" class="text-xl font-bold mt-4 text-gray-800 dark:text-white"></h3>
+<p id="profileSchool" class="text-maroon-700 dark:text-yellow-400 font-medium"></p>
+<span id="profileRole" class="inline-block mt-2 px-3 py-1 rounded-full bg-maroon-100 dark:bg-maroon-900/50 text-maroon-700 dark:text-yellow-400 text-xs font-bold"></span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl"><i class="fas fa-id-card text-maroon-700 dark:text-yellow-400"></i><div><p class="text-xs text-gray-500" data-lang="index-label">Index Number</p><p id="profileIndex" class="font-semibold dark:text-white"></p></div></div>
+<div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl"><i class="fas fa-phone text-maroon-700 dark:text-yellow-400"></i><div><p class="text-xs text-gray-500" data-lang="phone-label">Number</p><p id="profileNumber" class="font-semibold dark:text-white"></p></div></div>
+<div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl"><i class="fas fa-envelope text-maroon-700 dark:text-yellow-400"></i><div><p class="text-xs text-gray-500">Email</p><p id="profileEmail" class="font-semibold dark:text-white"></p></div></div>
+<div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl"><i class="fas fa-map-marker-alt text-maroon-700 dark:text-yellow-400"></i><div><p class="text-xs text-gray-500" data-lang="town-label">Town</p><p id="profileTown" class="font-semibold dark:text-white"></p></div></div>
+</div>
+<button onclick="logoutUser()" class="w-full mt-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition-colors"><i class="fas fa-sign-out-alt mr-2"></i><span data-lang="logout">Logout</span></button>
+</div>
+</div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 glass transition-all duration-300">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<a href="#home" class="flex items-center gap-3 group" onclick="scrollToSection('home')">
+<div class="flex items-center gap-1">
+<img src="https://i.postimg.cc/T3d8p55c/Whats-App-Image-2026-07-11-at-12-46-39-AM-(1).jpg" alt="School Logo" class="w-10 h-10 logo-circle">
+<img src="https://i.postimg.cc/XYHPqHbB/Whats-App-Image-2026-07-11-at-12-46-34-AM.jpg" alt="Media Logo" class="w-10 h-10 logo-circle -ml-2">
+</div>
+<div>
+<span class="text-xl font-bold text-maroon-800 dark:text-yellow-400 group-hover:text-maroon-600 transition-colors">ASMU</span>
+<p class="text-xs text-gray-500 dark:text-gray-400 -mt-1 hidden sm:block" data-lang="subtitle">Ananda Sastralaya Media Unit</p>
+</div>
+</a>
+
+<div class="hidden lg:flex items-center gap-6">
+<a href="#home" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-maroon-700 dark:hover:text-yellow-400" onclick="scrollToSection('home')" data-lang="nav-home">Home</a>
+<a href="#about" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-maroon-700 dark:hover:text-yellow-400" onclick="scrollToSection('about')" data-lang="nav-about">About</a>
+<a href="#stats" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-maroon-700 dark:hover:text-yellow-400" onclick="scrollToSection('stats')" data-lang="nav-stats">Stats</a>
+<a href="#event" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-maroon-700 dark:hover:text-yellow-400" onclick="scrollToSection('event')" data-lang="nav-event">Event</a>
+<a href="#gallery" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-maroon-700 dark:hover:text-yellow-400" onclick="scrollToSection('gallery')" data-lang="nav-gallery">Gallery</a>
+<a href="#sections" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-maroon-700 dark:hover:text-yellow-400" onclick="scrollToSection('sections')" data-lang="nav-sections">Sections</a>
+<a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 font-medium hover:text-maroon-700 dark:hover:text-yellow-400" onclick="scrollToSection('contact')" data-lang="nav-contact">Contact</a>
+</div>
+
+<div class="flex items-center gap-3">
+<!-- Language Switcher - Click Based -->
+<div class="lang-switcher hidden sm:block" id="langSwitcher">
+<div class="lang-btn" onclick="toggleLangDropdown(event)">
+<span class="lang-flag" id="currentLangFlag" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">EN</span>
+<span class="lang-text" id="currentLangText">English</span>
+<i class="fas fa-chevron-down text-xs text-maroon-700 dark:text-yellow-400 ml-1"></i>
+</div>
+<div class="lang-dropdown-menu" id="langDropdownMenu">
+<div class="lang-dropdown-item active" onclick="changeLanguage('en', event)" data-lang-item="en">
+<span class="lang-flag" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">EN</span>
+<span class="lang-name">English</span>
+</div>
+<div class="lang-dropdown-item" onclick="changeLanguage('si', event)" data-lang-item="si">
+<span class="lang-flag" style="background: linear-gradient(135deg, #f97316, #ea580c);">SI</span>
+<span class="lang-name">සිංහල</span>
+</div>
+<div class="lang-dropdown-item" onclick="changeLanguage('ta', event)" data-lang-item="ta">
+<span class="lang-flag" style="background: linear-gradient(135deg, #22c55e, #16a34a);">TA</span>
+<span class="lang-name">தமிழ்</span>
+</div>
+</div>
+</div>
+
+<button onclick="toggleTheme()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<i class="fas fa-moon text-gray-600 dark:text-yellow-400 dark:hidden"></i>
+<i class="fas fa-sun text-yellow-400 hidden dark:block"></i>
+</button>
+
+<button onclick="openProfileModal()" id="profileBtn" class="w-10 h-10 rounded-full bg-gradient-to-br from-maroon-700 to-maroon-900 flex items-center justify-center hover:scale-110 transition-transform overflow-hidden">
+<i class="fas fa-user text-yellow-400" id="profileIcon"></i>
+<img id="navProfileImg" src="" alt="" class="w-full h-full object-cover hidden">
+</button>
+
+<button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+<i class="fas fa-bars text-gray-600 dark:text-white"></i>
+</button>
+</div>
+</div>
+</div>
+<div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-80 h-full bg-white dark:bg-gray-900 shadow-2xl z-50 p-6">
+<button onclick="toggleMobileMenu()" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+<i class="fas fa-times text-gray-600 dark:text-white"></i>
+</button>
+<div class="mt-16 space-y-4">
+<a href="#home" onclick="scrollToSection('home'); toggleMobileMenu()" class="block py-3 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium" data-lang="nav-home">Home</a>
+<a href="#about" onclick="scrollToSection('about'); toggleMobileMenu()" class="block py-3 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium" data-lang="nav-about">About</a>
+<a href="#stats" onclick="scrollToSection('stats'); toggleMobileMenu()" class="block py-3 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium" data-lang="nav-stats">Stats</a>
+<a href="#event" onclick="scrollToSection('event'); toggleMobileMenu()" class="block py-3 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium" data-lang="nav-event">Event</a>
+<a href="#gallery" onclick="scrollToSection('gallery'); toggleMobileMenu()" class="block py-3 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium" data-lang="nav-gallery">Gallery</a>
+<a href="#sections" onclick="scrollToSection('sections'); toggleMobileMenu()" class="block py-3 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium" data-lang="nav-sections">Sections</a>
+<a href="#contact" onclick="scrollToSection('contact'); toggleMobileMenu()" class="block py-3 px-4 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium" data-lang="nav-contact">Contact</a>
+<hr class="border-gray-200 dark:border-gray-700">
+<div class="flex gap-2 px-4">
+<button onclick="changeLanguage('en'); toggleMobileMenu()" class="flex-1 py-2 rounded-lg bg-maroon-700 text-white text-sm font-medium">EN</button>
+<button onclick="changeLanguage('si'); toggleMobileMenu()" class="flex-1 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white text-sm font-medium">SI</button>
+<button onclick="changeLanguage('ta'); toggleMobileMenu()" class="flex-1 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white text-sm font-medium">TA</button>
+</div>
+</div>
+</div>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero-bg min-h-screen flex items-center pt-20 relative">
+<div class="particles" id="particles"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+<div class="order-2 lg:order-1">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-maroon-50 dark:bg-maroon-900/30 border border-maroon-200 dark:border-maroon-800 mb-6 animate-fadeInUp">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="text-sm font-medium text-maroon-700 dark:text-yellow-400" data-lang="welcome-badge">Welcome to Sastralian's Media</span>
+</div>
+
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6 animate-fadeInUp delay-100">
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-maroon-700 via-gold-600 to-maroon-800 dark:from-yellow-400 dark:via-yellow-500 dark:to-yellow-300" data-lang="hero-title">Ananda Sastralaya<br>Media Unit</span>
+</h1>
+
+<p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg animate-fadeInUp delay-200 leading-relaxed" data-lang="hero-desc">
+The official media unit of Ananda Sastralaya, dedicated to capturing moments, sharing stories, and connecting our school community through creative digital content.
+</p>
+
+<div class="flex flex-wrap gap-4 animate-fadeInUp delay-300">
+<a href="#sections" class="btn-primary" onclick="scrollToSection('sections')">
+<span data-lang="explore">Explore Sections</span>
+<i class="fas fa-arrow-right"></i>
+</a>
+<a href="#event" class="btn-gold" onclick="scrollToSection('event')">
+<span data-lang="next-event">Next Event</span>
+<i class="fas fa-calendar-alt"></i>
+</a>
+</div>
+
+<div class="flex gap-8 mt-12 animate-fadeInUp delay-400">
+<div><p class="text-2xl font-bold text-maroon-800 dark:text-yellow-400">2.33k+</p><p class="text-sm text-gray-500 dark:text-gray-400" data-lang="youtube-subs">YouTube Subs</p></div>
+<div class="w-px bg-gray-300 dark:bg-gray-700"></div>
+<div><p class="text-2xl font-bold text-maroon-800 dark:text-yellow-400">7.0k+</p><p class="text-sm text-gray-500 dark:text-gray-400" data-lang="fb-followers">FB Followers</p></div>
+<div class="w-px bg-gray-300 dark:bg-gray-700"></div>
+<div><p class="text-2xl font-bold text-maroon-800 dark:text-yellow-400">2.9K+</p><p class="text-sm text-gray-500 dark:text-gray-400" data-lang="wa-followers">WA Followers</p></div>
+</div>
+</div>
+
+<div class="order-1 lg:order-2 relative">
+<div class="relative z-10 grid grid-cols-2 gap-4">
+<div class="space-y-4 mt-8">
+<div class="animate-fadeInLeft delay-200">
+<img src="https://i.postimg.cc/zGtQvtrR/Whats-App-Image-2026-07-11-at-12-46-35-AM.jpg" alt="School Activity" class="w-full h-48 object-cover rounded-2xl shadow-xl hover:scale-105 transition-transform duration-500">
+</div>
+<div class="animate-fadeInLeft delay-400">
+<img src="https://i.postimg.cc/2SkpVLLt/Whats-App-Image-2026-07-11-at-12-46-39-AM.jpg" alt="School Activity" class="w-full h-48 object-cover rounded-2xl shadow-xl hover:scale-105 transition-transform duration-500">
+</div>
+</div>
+<div class="space-y-4">
+<div class="animate-fadeInRight delay-300">
+<img src="https://i.postimg.cc/JzPfJ7jx/Whats-App-Image-2026-07-11-at-12-46-38-AM-(2).jpg" alt="School Activity" class="w-full h-48 object-cover rounded-2xl shadow-xl hover:scale-105 transition-transform duration-500">
+</div>
+<div class="animate-fadeInRight delay-500">
+<img src="https://i.postimg.cc/wj0CJxDF/Whats-App-Image-2026-07-11-at-12-46-38-AM-(1).jpg" alt="School Activity" class="w-full h-48 object-cover rounded-2xl shadow-xl hover:scale-105 transition-transform duration-500">
+</div>
+</div>
+</div>
+
+<div class="absolute -top-8 -left-8 animate-float z-20">
+<img src="https://i.postimg.cc/T3d8p55c/Whats-App-Image-2026-07-11-at-12-46-39-AM-(1).jpg" alt="School Logo" class="w-20 h-20 logo-circle shadow-2xl">
+</div>
+<div class="absolute -bottom-4 -right-4 animate-float z-20" style="animation-delay:1s">
+<img src="https://i.postimg.cc/XYHPqHbB/Whats-App-Image-2026-07-11-at-12-46-34-AM.jpg" alt="Media Logo" class="w-20 h-20 logo-circle shadow-2xl">
+</div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border-2 border-dashed border-yellow-400/30 rounded-full animate-spin-slow pointer-events-none"></div>
+</div>
+</div>
+</div>
+<a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce-gentle" onclick="scrollToSection('about')">
+<div class="w-12 h-12 rounded-full bg-maroon-700 dark:bg-yellow-500 flex items-center justify-center shadow-lg">
+<i class="fas fa-chevron-down text-white dark:text-maroon-900"></i>
+</div>
+</a>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-24 bg-white dark:bg-gray-900 relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 reveal">
+<span class="inline-block px-4 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-maroon-700 dark:text-yellow-400 text-sm font-semibold mb-4" data-lang="about-badge">About Us</span>
+<h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4" data-lang="about-title">Who We Are</h2>
+<div class="section-divider"></div>
+</div>
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+<div class="reveal">
+<div class="relative">
+<!-- AFTER -->
+<iframe 
+    src="https://drive.google.com/file/d/1duKxIbqjROnJV9ZyRpgWEm0BGbN7oku6/preview" 
+    class="w-full h-96 rounded-3xl shadow-2xl border-0" 
+    allow="autoplay">
+</iframe>
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-maroon-700 to-maroon-900 rounded-2xl flex items-center justify-center shadow-xl">
+<i class="fas fa-video text-4xl text-yellow-400"></i>
+</div>
+<div class="absolute -top-4 -left-4 w-24 h-24 bg-yellow-400 rounded-2xl flex items-center justify-center shadow-xl rotate-12">
+<i class="fas fa-camera text-3xl text-maroon-800"></i>
+</div>
+</div>
+</div>
+<div class="reveal space-y-6">
+<h3 class="text-2xl font-bold text-maroon-800 dark:text-yellow-400" data-lang="about-subtitle">Sastralian's Media Unit</h3>
+<p class="text-gray-600 dark:text-gray-300 leading-relaxed" data-lang="about-desc1">
+ASMU (Ananda Sastralaya Media Unit) is the heartbeat of our school's digital presence. We are a passionate team of students dedicated to documenting school life, creating engaging content, and building a strong online community.
+</p>
+<p class="text-gray-600 dark:text-gray-300 leading-relaxed" data-lang="about-desc2">
+From covering school events and sports days to producing creative reels and broadcasts, we ensure every memorable moment is captured and shared with the world. Our mission is to showcase the vibrant spirit of Ananda Sastralaya.
+</p>
+<div class="grid grid-cols-2 gap-4 mt-8">
+<div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border-l-4 border-maroon-700">
+<i class="fas fa-bullseye text-2xl text-maroon-700 dark:text-yellow-400 mb-2"></i>
+<h4 class="font-bold text-gray-800 dark:text-white" data-lang="mission">Our Mission</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1" data-lang="mission-desc">To capture and share every school moment</p>
+</div>
+<div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border-l-4 border-yellow-500">
+<i class="fas fa-eye text-2xl text-yellow-600 dark:text-yellow-400 mb-2"></i>
+<h4 class="font-bold text-gray-800 dark:text-white" data-lang="vision">Our Vision</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1" data-lang="vision-desc">To be the best school media unit</p>
+</div>
+</div>
+<a href="https://about-midea.edgeone.dev/" target="_blank" class="btn-primary mt-4">
+<span data-lang="learn-more">Learn More About Media</span>
+<i class="fas fa-external-link-alt"></i>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Stats Section -->
+<section id="stats" class="py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 relative">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 reveal">
+<span class="inline-block px-4 py-1 rounded-full bg-maroon-100 dark:bg-maroon-900/30 text-maroon-700 dark:text-yellow-400 text-sm font-semibold mb-4" data-lang="stats-badge">Our Reach</span>
+<h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4" data-lang="stats-title">Our Social Presence</h2>
+<div class="section-divider"></div>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="stat-card reveal">
+<div class="w-16 h-16 rounded-2xl bg-red-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+<i class="fab fa-youtube text-3xl text-white"></i>
+</div>
+<p class="stat-number" data-count="2320">0</p>
+<p class="text-gray-600 dark:text-gray-300 font-medium mt-2" data-lang="youtube">YouTube Subscribers</p>
+<a href="https://www.youtube.com/@SastraliansMediaOfficial" target="_blank" class="inline-flex items-center gap-2 mt-4 text-red-600 hover:text-red-700 font-medium text-sm transition-colors">
+<span data-lang="visit-yt">Visit Channel</span>
+<i class="fas fa-arrow-right"></i>
+</a>
+</div>
+<div class="stat-card reveal" style="transition-delay:0.1s">
+<div class="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+<i class="fab fa-facebook-f text-3xl text-white"></i>
+</div>
+<p class="stat-number" data-count="7000">0</p>
+<p class="text-gray-600 dark:text-gray-300 font-medium mt-2" data-lang="facebook">Facebook Followers</p>
+<a href="https://web.facebook.com/people/Ananda-Sastralaya-Media-Unit/100077032862976/" target="_blank" class="inline-flex items-center gap-2 mt-4 text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors">
+<span data-lang="visit-fb">Visit Page</span>
+<i class="fas fa-arrow-right"></i>
+</a>
+</div>
+<div class="stat-card reveal" style="transition-delay:0.2s">
+<div class="w-16 h-16 rounded-2xl bg-green-500 flex items-center justify-center mx-auto mb-4 shadow-lg">
+<i class="fab fa-whatsapp text-3xl text-white"></i>
+</div>
+<p class="stat-number" data-count="2900">0</p>
+<p class="text-gray-600 dark:text-gray-300 font-medium mt-2" data-lang="whatsapp">WhatsApp Followers</p>
+<a href="https://whatsapp.com/channel/0029Va97lK33gvWYulAdeW3c" target="_blank" class="inline-flex items-center gap-2 mt-4 text-green-600 hover:text-green-700 font-medium text-sm transition-colors">
+<span data-lang="join-wa">Join Channel</span>
+<i class="fas fa-arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Next Event Section -->
+<section id="event" class="py-24 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-maroon-900 via-maroon-800 to-maroon-900"></div>
+<div class="absolute inset-0 opacity-10">
+<div class="absolute top-20 left-20 w-64 h-64 border border-yellow-400 rounded-full animate-spin-slow"></div>
+<div class="absolute bottom-20 right-20 w-48 h-48 border border-yellow-400 rounded-full animate-spin-slow" style="animation-direction:reverse"></div>
+</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="text-center mb-16 reveal">
+<span class="inline-block px-4 py-1 rounded-full bg-yellow-500/20 text-yellow-400 text-sm font-semibold mb-4 border border-yellow-500/30" data-lang="event-badge">Upcoming</span>
+<h2 class="text-4xl md:text-5xl font-bold text-white mb-4" data-lang="event-title">Next Event</h2>
+<div class="section-divider"></div>
+</div>
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+<div class="reveal">
+<div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+<img src="https://i.postimg.cc/QCGyrCQG/Yellow-and-Orange-Illuatrative-Vesak-Day-Facebook-Cover.png" alt="Esala Poya Event" class="w-full h-96 object-cover group-hover:scale-110 transition-transform duration-700">
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<span class="inline-block px-3 py-1 rounded-full bg-yellow-500 text-maroon-900 text-xs font-bold mb-2">#NikiniPoya</span>
+<h3 class="text-2xl font-bold text-white" data-lang="event-name">Nikini Full Moon Poya Day</h3>
+<p class="text-gray-300 text-sm mt-1" data-lang="event-desc">Annual Buddhist religious observance at Ananda Sastralaya celebrating the Nikini Full Moon Poya Day with traditional ceremonies and cultural programs.</p>
+</div>
+</div>
+</div>
+<div class="reveal">
+<div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
+<h3 class="text-2xl font-bold text-yellow-400 mb-2" data-lang="countdown-title">Event Countdown</h3>
+<p class="text-gray-300 mb-8" data-lang="countdown-desc">Time remaining until the Nikini Full Moon Poya Day celebration</p>
+<div class="grid grid-cols-4 gap-4 mb-8" id="countdown">
+<div class="countdown-box"><p class="countdown-number" id="days">00</p><p class="countdown-label" data-lang="days">Days</p></div>
+<div class="countdown-box"><p class="countdown-number" id="hours">00</p><p class="countdown-label" data-lang="hours">Hours</p></div>
+<div class="countdown-box"><p class="countdown-number" id="minutes">00</p><p class="countdown-label" data-lang="minutes">Minutes</p></div>
+<div class="countdown-box"><p class="countdown-number" id="seconds">00</p><p class="countdown-label" data-lang="seconds">Seconds</p></div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3 text-gray-300"><i class="fas fa-calendar text-yellow-400 w-6"></i><span data-lang="start-date">Start: August 27, 2026 at 12:00 PM</span></div>
+<div class="flex items-center gap-3 text-gray-300"><i class="fas fa-clock text-yellow-400 w-6"></i><span data-lang="end-date">End: August 27, 2026 at 12:00 AM</span></div>
+<div class="flex items-center gap-3 text-gray-300"><i class="fas fa-map-marker-alt text-yellow-400 w-6"></i><span>Ananda Sastralaya School Premises</span></div>
+</div>
+<button class="btn-gold w-full mt-8" onclick="addToCalendar()"><i class="fas fa-bell mr-2"></i><span data-lang="remind-me">Remind Me</span></button>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="py-24 bg-white dark:bg-gray-900">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 reveal">
+<span class="inline-block px-4 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-maroon-700 dark:text-yellow-400 text-sm font-semibold mb-4" data-lang="gallery-badge">Gallery</span>
+<h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4" data-lang="gallery-title">Our Memories</h2>
+<p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto" data-lang="gallery-desc">Capturing the beautiful moments of our school journey</p>
+<div class="section-divider mt-6"></div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="gallery-item reveal h-64 md:h-72 md:col-span-2" onclick="openImageViewer('https://i.postimg.cc/2SkpVLLt/Whats-App-Image-2026-07-11-at-12-46-39-AM.jpg')"><img src="https://i.postimg.cc/2SkpVLLt/Whats-App-Image-2026-07-11-at-12-46-39-AM.jpg" alt="Gallery 1"><div class="overlay"><div class="text-white"><p class="font-bold">Some Buildings</p><p class="text-sm text-gray-300">photo shot in playground</p></div></div></div>
+<div class="gallery-item reveal h-64 md:h-72" onclick="openImageViewer('https://i.postimg.cc/JzPfJ7jx/Whats-App-Image-2026-07-11-at-12-46-38-AM-(2).jpg')"><img src="https://i.postimg.cc/JzPfJ7jx/Whats-App-Image-2026-07-11-at-12-46-38-AM-(2).jpg" alt="Gallery 3"><div class="overlay"><div class="text-white"><p class="font-bold">Technical building</p><p class="text-sm text-gray-300">Photo shot in garden</p></div></div></div>
+<div class="gallery-item reveal h-64 md:h-72" onclick="openImageViewer('https://i.postimg.cc/wj0CJxDF/Whats-App-Image-2026-07-11-at-12-46-38-AM-(1).jpg')"><img src="https://i.postimg.cc/wj0CJxDF/Whats-App-Image-2026-07-11-at-12-46-38-AM-(1).jpg" alt="Gallery 4"><div class="overlay"><div class="text-white"><p class="font-bold">Technical Hall</p><p class="text-sm text-gray-300">Photo shot in front of the art section</p></div></div></div>
+<div class="gallery-item reveal h-64 md:h-72" onclick="openImageViewer('https://i.postimg.cc/13Jk6RDY/Whats-App-Image-2026-07-11-at-12-46-37-AM-(1).jpg')"><img src="https://i.postimg.cc/13Jk6RDY/Whats-App-Image-2026-07-11-at-12-46-37-AM-(1).jpg" alt="Gallery 5"><div class="overlay"><div class="text-white"><p class="font-bold">Out door stage</p><p class="text-sm text-gray-300">Photo shot in front of the library</p></div></div></div>
+<div class="gallery-item reveal h-64 md:h-72" onclick="openImageViewer('https://i.postimg.cc/XYQRFN9P/Whats-App-Image-2026-07-11-at-12-46-37-AM.jpg')"><img src="https://i.postimg.cc/XYQRFN9P/Whats-App-Image-2026-07-11-at-12-46-37-AM.jpg" alt="Gallery 6"><div class="overlay"><div class="text-white"><p class="font-bold">Font buildings</p><p class="text-sm text-gray-300">Side photograph in carpark</p></div></div></div>
+<div class="gallery-item reveal h-64 md:h-72" onclick="openImageViewer('https://i.postimg.cc/2S2svj4z/Whats-App-Image-2026-07-11-at-12-46-36-AM-(1).jpg')"><img src="https://i.postimg.cc/2S2svj4z/Whats-App-Image-2026-07-11-at-12-46-36-AM-(1).jpg" alt="Gallery 7"><div class="overlay"><div class="text-white"><p class="font-bold">Lord Buddha</p><p class="text-sm text-gray-300">statue of Lord Buddha</p></div></div></div>
+<div class="gallery-item reveal h-64 md:h-72" onclick="openImageViewer('https://i.postimg.cc/FKz2xtZ7/Whats-App-Image-2026-07-11-at-12-46-36-AM.jpg')"><img src="https://i.postimg.cc/FKz2xtZ7/Whats-App-Image-2026-07-11-at-12-46-36-AM.jpg" alt="Gallery 8"><div class="overlay"><div class="text-white"><p class="font-bold">Culture</p><p class="text-sm text-gray-300">Good culture for students</p></div></div></div>
+</div>
+</div>
+</section>
+
+<!-- All Sections -->
+<section id="sections" class="py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 reveal">
+<span class="inline-block px-4 py-1 rounded-full bg-maroon-100 dark:bg-maroon-900/30 text-maroon-700 dark:text-yellow-400 text-sm font-semibold mb-4" data-lang="sections-badge">Explore</span>
+<h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4" data-lang="sections-title">Our Sections</h2>
+<p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto" data-lang="sections-desc">Discover all the platforms and content we create</p>
+<div class="section-divider mt-6"></div>
+</div>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+<div class="glass-card rounded-2xl p-6 reveal group">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-film text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="reels-title">Reels</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="reels-desc">Short-form video content showcasing school life and events in creative ways.</p>
+<a href="https://reels-new.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="watch-reels">Watch Reels</span><i class="fas fa-play ml-2"></i></a>
+</div>
+<div class="glass-card rounded-2xl p-6 reveal group" style="transition-delay:0.1s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-broadcast-tower text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="broadcast-title">Broadcast</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="broadcast-desc">Live and recorded broadcasts of school announcements, events, and special programs.</p>
+<a href="https://broadcast.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="watch-broadcast">Watch Broadcast</span><i class="fas fa-tv ml-2"></i></a>
+</div>
+<div class="glass-card rounded-2xl p-6 reveal group" style="transition-delay:0.2s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-info-circle text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="aboutmedia-title">About Media</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="aboutmedia-desc">Learn about our media unit, team members, and the story behind ASMU.</p>
+<a href="https://about-midea.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="learn-more">Learn More</span><i class="fas fa-arrow-right ml-2"></i></a>
+</div>
+<div class="glass-card rounded-2xl p-6 reveal group" style="transition-delay:0.3s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-school text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="schoolprofile-title">School Profile</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="schoolprofile-desc">Explore the history, achievements, and profile of Ananda Sastralaya.</p>
+<a href="https://about-school.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="view-profile">View Profile</span><i class="fas fa-building ml-2"></i></a>
+</div>
+</div>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+<div class="glass-card rounded-2xl p-6 reveal group">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-comments text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="comments-title">Comments</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="comments-desc">Share your thoughts and feedback with the ASMU community.</p>
+<a href="https://comments.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="view-comments">View Comments</span><i class="fas fa-comment ml-2"></i></a>
+</div>
+<div class="glass-card rounded-2xl p-6 reveal group" style="transition-delay:0.1s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-500 to-rose-700 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-flag text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="report-title">Report</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="report-desc">Report issues, suggestions, or concerns to help us improve.</p>
+<a href="https://report-me.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="report-now">Report Now</span><i class="fas fa-exclamation-circle ml-2"></i></a>
+</div>
+<div class="glass-card rounded-2xl p-6 reveal group" style="transition-delay:0.2s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-sky-600 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-handshake text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="touchus-title">Touch Us</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="touchus-desc">Get in touch with us for collaborations and partnerships.</p>
+<a href="https://touch-us.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="contact-us">Contact Us</span><i class="fas fa-envelope ml-2"></i></a>
+</div>
+<div class="glass-card rounded-2xl p-6 reveal group" style="transition-delay:0.3s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-newspaper text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="latestnews-title">Latest News</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="latestnews-desc">Stay updated with the latest news and announcements from ASMU.</p>
+<a href="https://latest-news.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="read-news">Read News</span><i class="fas fa-newspaper ml-2"></i></a>
+</div>
+</div>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="glass-card rounded-2xl p-6 reveal group">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-pen-fancy text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="latestposts-title">Latest Posts</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="latestposts-desc">Check out our latest blog posts and articles about school life.</p>
+<a href="https://asmu-posts.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="read-posts">Read Posts</span><i class="fas fa-book-open ml-2"></i></a>
+</div>
+<div class="glass-card rounded-2xl p-6 reveal group" style="transition-delay:0.1s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 to-pink-700 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-video text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="livestream-title">Live Streaming</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="livestream-desc">Watch live streams of school events and special programs in real-time.</p>
+<a href="https://streaming.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="watch-live">Watch Live</span><i class="fas fa-circle text-red-500 ml-2 animate-pulse"></i></a>
+</div>
+<div class="glass-card rounded-2xl p-6 reveal group" style="transition-delay:0.2s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-user-plus text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="join-media-title">Join Media</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="join-media-desc">Apply to become a member of the ASMU team and contribute to our school media projects.</p>
+<a href="https://join-midea.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="join">Join Now</span><i class="fas fa-arrow-right ml-2"></i></a>
+</div>
+<div class="glass-card rounded-2xl p-6 reveal group" style="transition-delay:0.3s">
+<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform"><i class="fas fa-users text-2xl text-white"></i></div>
+<h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2" data-lang="aboutdevs-title">About Developers</h3>
+<p class="text-gray-600 dark:text-gray-300 text-sm mb-4" data-lang="aboutdevs-desc">Meet the talented developers behind the ASMU digital platform.</p>
+<a href="https://devolopers.edgeone.dev/" target="_blank" class="btn-primary text-sm w-full justify-center"><span data-lang="meet-team">Meet Team</span><i class="fas fa-users ml-2"></i></a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-24 bg-white dark:bg-gray-900 relative">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16 reveal">
+<span class="inline-block px-4 py-1 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-maroon-700 dark:text-yellow-400 text-sm font-semibold mb-4" data-lang="contact-badge">Contact</span>
+<h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4" data-lang="contact-title">Get In Touch</h2>
+<p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto" data-lang="contact-desc">Connect with us for collaborations, inquiries, or just to say hello</p>
+<div class="section-divider mt-6"></div>
+</div>
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+
+<div class="reveal">
+<div class="bg-gradient-to-br from-maroon-800 to-maroon-900 rounded-3xl p-8 text-white relative overflow-hidden">
+<div class="absolute top-0 right-0 w-40 h-40 bg-yellow-400/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+<div class="absolute bottom-0 left-0 w-32 h-32 bg-yellow-400/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+<h3 class="text-2xl font-bold mb-6 relative z-10" data-lang="contact-info">Contact Information</h3>
+<div class="space-y-6 relative z-10">
+<div class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center"><i class="fas fa-envelope text-yellow-400 text-xl"></i></div><div><p class="text-sm text-gray-300">Email</p><p class="font-semibold">asmmidea@gmail.com</p></div></div>
+<div class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center"><i class="fab fa-youtube text-red-400 text-xl"></i></div><div><p class="text-sm text-gray-300">YouTube</p><p class="font-semibold">2.33k Subscribers</p></div></div>
+<div class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center"><i class="fab fa-facebook-f text-blue-400 text-xl"></i></div><div><p class="text-sm text-gray-300">Facebook</p><p class="font-semibold">7.0K Followers</p></div></div>
+<div class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center"><i class="fab fa-whatsapp text-green-400 text-xl"></i></div><div><p class="text-sm text-gray-300">WhatsApp</p><p class="font-semibold">2.9K Followers</p></div></div>
+</div>
+<div class="flex gap-4 mt-8 relative z-10">
+<a href="https://www.youtube.com/@SastraliansMediaOfficial" target="_blank" class="social-icon bg-red-600 text-white hover:bg-red-700"><i class="fab fa-youtube"></i></a>
+<a href="https://web.facebook.com/people/Ananda-Sastralaya-Media-Unit/100077032862976/" target="_blank" class="social-icon bg-blue-600 text-white hover:bg-blue-700"><i class="fab fa-facebook-f"></i></a>
+<a href="https://whatsapp.com/channel/0029Va97lK33gvWYulAdeW3c" target="_blank" class="social-icon bg-green-500 text-white hover:bg-green-600"><i class="fab fa-whatsapp"></i></a>
+<a href="mailto:asmmidea@gmail.com" class="social-icon bg-gray-700 text-white hover:bg-gray-800"><i class="fas fa-envelope"></i></a>
+</div>
+</div>
+</div>
+
+<div class="reveal">
+<form id="contactForm" class="space-y-5" onsubmit="submitContact(event)">
+<div class="grid md:grid-cols-2 gap-5">
+<div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="contact-name">Name</label><input type="text" id="contactName" required class="input-field" placeholder="Your name"></div>
+<div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label><input type="email" id="contactEmail" required class="input-field" placeholder="Your email"></div>
+</div>
+<div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="contact-subject">Subject</label><input type="text" id="contactSubject" required class="input-field" placeholder="Message subject"></div>
+<div><label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-lang="contact-message">Message</label><textarea id="contactMessage" rows="4" required class="input-field resize-none" placeholder="Your message..."></textarea></div>
+
+<!-- Success Message -->
+<div id="contactSuccess" class="hidden">
+<div class="p-5 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-center">
+<i class="fas fa-check-circle text-4xl text-green-500 mb-3 block"></i>
+<p class="text-lg font-bold text-green-700 dark:text-green-300" data-lang="sent-success">Successfully Sent!</p>
+<p class="text-sm text-green-600 dark:text-green-400 mt-2" data-lang="thank-you">Thank you for contacting us. We will get back to you soon.</p>
+</div>
+</div>
+
+<button type="submit" id="contactSubmitBtn" class="btn-primary w-full justify-center"><span data-lang="send-message">Send Message</span><i class="fas fa-paper-plane ml-2"></i></button>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gradient-to-br from-gray-900 to-black text-white py-16 relative overflow-hidden">
+<div class="absolute inset-0 opacity-5">
+<div class="absolute top-10 left-10 w-64 h-64 border border-yellow-400 rounded-full"></div>
+<div class="absolute bottom-10 right-10 w-48 h-48 border border-yellow-400 rounded-full"></div>
+</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="grid md:grid-cols-4 gap-8 mb-12">
+<div class="md:col-span-2">
+<div class="flex items-center gap-3 mb-4">
+<div class="flex items-center gap-1">
+<img src="https://i.postimg.cc/T3d8p55c/Whats-App-Image-2026-07-11-at-12-46-39-AM-(1).jpg" alt="School Logo" class="w-11 h-11 logo-circle">
+<img src="https://i.postimg.cc/XYHPqHbB/Whats-App-Image-2026-07-11-at-12-46-34-AM.jpg" alt="Media Logo" class="w-11 h-11 logo-circle -ml-2">
+</div>
+<div><span class="text-2xl font-bold text-yellow-400">ASMU</span><p class="text-sm text-gray-400">Ananda Sastralaya Media Unit</p></div>
+</div>
+<p class="text-gray-400 text-sm leading-relaxed max-w-md" data-lang="footer-desc">
+The official media unit dedicated to capturing and sharing the vibrant spirit of Ananda Sastralaya through creative digital content.
+</p>
+</div>
+<div>
+<h4 class="text-lg font-bold text-yellow-400 mb-4" data-lang="quick-links">Quick Links</h4>
+<ul class="space-y-2">
+<li><a href="#home" onclick="scrollToSection('home')" class="footer-link text-gray-400 hover:text-yellow-400 text-sm" data-lang="nav-home">Home</a></li>
+<li><a href="#about" onclick="scrollToSection('about')" class="footer-link text-gray-400 hover:text-yellow-400 text-sm" data-lang="nav-about">About</a></li>
+<li><a href="#gallery" onclick="scrollToSection('gallery')" class="footer-link text-gray-400 hover:text-yellow-400 text-sm" data-lang="nav-gallery">Gallery</a></li>
+<li><a href="#sections" onclick="scrollToSection('sections')" class="footer-link text-gray-400 hover:text-yellow-400 text-sm" data-lang="nav-sections">Sections</a></li>
+<li><a href="#contact" onclick="scrollToSection('contact')" class="footer-link text-gray-400 hover:text-yellow-400 text-sm" data-lang="nav-contact">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-lg font-bold text-yellow-400 mb-4" data-lang="useful-links">Useful Links</h4>
+<ul class="space-y-2">
+<li><a href="https://reels-new.edgeone.app/" target="_blank" class="footer-link text-gray-400 hover:text-yellow-400 text-sm">Reels</a></li>
+<li><a href="https://broadcast.edgeone.app/" target="_blank" class="footer-link text-gray-400 hover:text-yellow-400 text-sm">Broadcast</a></li>
+<li><a href="https://about-midea.edgeone.app/" target="_blank" class="footer-link text-gray-400 hover:text-yellow-400 text-sm">About Media</a></li>
+<li><a href="https://about-school.edgeone.app/" target="_blank" class="footer-link text-gray-400 hover:text-yellow-400 text-sm">School Profile</a></li>
+<li><a href="https://comments.edgeone.dev/" target="_blank" class="footer-link text-gray-400 hover:text-yellow-400 text-sm">Comments</a></li>
+<li><a href="https://latest-news.edgeone.dev/" target="_blank" class="footer-link text-gray-400 hover:text-yellow-400 text-sm">Latest News</a></li>
+<li><a href="https://asmu-posts.edgeone.dev/" target="_blank" class="footer-link text-gray-400 hover:text-yellow-400 text-sm">Latest Posts</a></li>
+<li><a href="https://streaming.edgeone.dev/" target="_blank" class="footer-link text-gray-400 hover:text-yellow-400 text-sm">Live Streaming</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-gray-500 text-sm">&copy; 2026 ASMU. All rights reserved.</p>
+<div class="flex gap-4">
+<a href="https://www.youtube.com/@SastraliansMediaOfficial" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors"><i class="fab fa-youtube text-white"></i></a>
+<a href="https://web.facebook.com/people/Ananda-Sastralaya-Media-Unit/100077032862976/" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-colors"><i class="fab fa-facebook-f text-white"></i></a>
+<a href="https://whatsapp.com/channel/0029Va97lK33gvWYulAdeW3c" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-600 transition-colors"><i class="fab fa-whatsapp text-white"></i></a>
+</div>
+</div>
+</div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+// ===== TRANSLATIONS =====
+const translations = {
+    en: {
+        "login": "Login", "login-desc": "Login to your ASMU account", "username": "Username", "password": "Password",
+        "login-btn": "Login", "no-account": "Don't have an account?", "create-account-link": "Create Account",
+        "register-desc": "Create your ASMU account", "profile-photo": "Profile Photo", "full-name": "Full Name",
+        "create-btn": "Create Account", "have-account": "Already have an account?", "login-link": "Login",
+        "select-role": "Select Your Role", "role-teacher": "Teacher", "role-student": "Student", "role-public": "Public",
+        "school": "School", "index": "Index Number", "phone": "Phone Number", "town": "Town",
+        "index-label": "Index Number", "phone-label": "Number", "town-label": "Town", "logout": "Logout",
+        "subtitle": "Ananda Sastralaya Media Unit",
+        "nav-home": "Home", "nav-about": "About", "nav-stats": "Stats", "nav-event": "Event", "nav-gallery": "Gallery", "nav-sections": "Sections", "nav-contact": "Contact",
+        "welcome-badge": "Welcome to Sastralian's Media",
+        "hero-title": "Ananda Sastralaya<br>Media Unit",
+        "hero-desc": "The official media unit of Ananda Sastralaya, dedicated to capturing moments, sharing stories, and connecting our school community through creative digital content.",
+        "explore": "Explore Sections", "next-event": "Next Event",
+        "youtube-subs": "YouTube Subs", "fb-followers": "FB Followers", "wa-followers": "WA Followers",
+        "about-badge": "About Us", "about-title": "Who We Are", "about-subtitle": "Sastralian's Media Unit",
+        "about-desc1": "ASMU (Ananda Sastralaya Media Unit) is the heartbeat of our school's digital presence. We are a passionate team of students dedicated to documenting school life, creating engaging content, and building a strong online community.",
+        "about-desc2": "From covering school events and sports days to producing creative reels and broadcasts, we ensure every memorable moment is captured and shared with the world. Our mission is to showcase the vibrant spirit of Ananda Sastralaya.",
+        "mission": "Our Mission", "mission-desc": "To capture and share every school moment",
+        "vision": "Our Vision", "vision-desc": "To be the best school media unit",
+        "learn-more": "Learn More About Media",
+        "stats-badge": "Our Reach", "stats-title": "Our Social Presence",
+        "youtube": "YouTube Subscribers", "facebook": "Facebook Followers", "whatsapp": "WhatsApp Followers",
+        "visit-yt": "Visit Channel", "visit-fb": "Visit Page", "join-wa": "Join Channel",
+        "event-badge": "Upcoming", "event-title": "Next Event", "event-name": "Nikini Full Moon Poya Day", "event-desc": "Annual Buddhist religious observance at Ananda Sastralaya celebrating the Nikini Full Moon Poya Day with traditional ceremonies and cultural programs.",
+        "countdown-title": "Event Countdown", "countdown-desc": "Time remaining until the Nikini Full Moon Poya Day celebration",
+        "days": "Days", "hours": "Hours", "minutes": "Minutes", "seconds": "Seconds",
+        "start-date": "Start: August 27, 2026 at 12:00 PM", "end-date": "End: August 27, 2026 at 12:00 AM",
+        "remind-me": "Remind Me",
+        "gallery-badge": "Gallery", "gallery-title": "Our Memories", "gallery-desc": "Capturing the beautiful moments of our school journey",
+        "sections-badge": "Explore", "sections-title": "Our Sections", "sections-desc": "Discover all the platforms and content we create",
+        "reels-title": "Reels", "reels-desc": "Short-form video content showcasing school life and events in creative ways.", "watch-reels": "Watch Reels",
+        "broadcast-title": "Broadcast", "broadcast-desc": "Live and recorded broadcasts of school announcements, events, and special programs.", "watch-broadcast": "Watch Broadcast",
+        "aboutmedia-title": "About Media", "aboutmedia-desc": "Learn about our media unit, team members, and the story behind ASMU.",
+        "schoolprofile-title": "School Profile", "schoolprofile-desc": "Explore the history, achievements, and profile of Ananda Sastralaya.", "view-profile": "View Profile",
+        "comments-title": "Comments", "comments-desc": "Share your thoughts and feedback with the ASMU community.", "view-comments": "View Comments",
+        "report-title": "Report", "report-desc": "Report issues, suggestions, or concerns to help us improve.", "report-now": "Report Now",
+        "touchus-title": "Touch Us", "touchus-desc": "Get in touch with us for collaborations and partnerships.", "contact-us": "Contact Us",
+        "latestnews-title": "Latest News", "latestnews-desc": "Stay updated with the latest news and announcements from ASMU.", "read-news": "Read News",
+        "latestposts-title": "Latest Posts", "latestposts-desc": "Check out our latest blog posts and articles about school life.", "read-posts": "Read Posts",
+        "livestream-title": "Live Streaming", "livestream-desc": "Watch live streams of school events and special programs in real-time.", "watch-live": "Watch Live",
+        "join-media-title": "Join Media", "join-media-desc": "Apply to become a member of the ASMU team and contribute to our school media projects.",
+        "aboutmedia-dev-title": "About Media (Dev)", "aboutmedia-dev-desc": "Developer version of About Media with new features and updates.",
+        "aboutdevs-title": "About Developers", "aboutdevs-desc": "Meet the talented developers behind the ASMU digital platform.", "meet-team": "Meet Team",
+        "contact-badge": "Contact", "contact-title": "Get In Touch", "contact-desc": "Connect with us for collaborations, inquiries, or just to say hello",
+        "sent-success": "Successfully Sent!", "thank-you": "Thank you for contacting us",
+        "contact-info": "Contact Information", "contact-name": "Name", "contact-subject": "Subject", "contact-message": "Message", "send-message": "Send Message",
+        "footer-desc": "The official media unit dedicated to capturing and sharing the vibrant spirit of Ananda Sastralaya through creative digital content.",
+        "quick-links": "Quick Links", "useful-links": "Useful Links"
+    },
+    si: {
+        "login": "පිවිසෙන්න", "login-desc": "ඔබගේ ASMU ගිණුමට පිවිසෙන්න", "username": "පරිශීලක නාමය", "password": "මුරපදය",
+        "login-btn": "පිවිසෙන්න", "no-account": "ගිණුමක් නැද්ද?", "create-account-link": "ගිණුම සාදන්න",
+        "register-desc": "ඔබගේ ASMU ගිණුම සාදන්න", "profile-photo": "පැතිකඩ ඡායාරූපය", "full-name": "සම්පූර්ණ නම",
+        "create-btn": "ගිණුම සාදන්න", "have-account": "දැනටමත් ගිණුමක් තිබේද?", "login-link": "පිවිසෙන්න",
+        "select-role": "ඔබගේ භූමිකාව තෝරන්න", "role-teacher": "ගුරුවරයා", "role-student": "ශිෂ්‍යයා", "role-public": "ජනතාව",
+        "school": "පාසල", "index": "අනුක්‍රමික අංකය", "phone": "දුරකථන අංකය", "town": "නගරය",
+        "index-label": "අනුක්‍රමික අංකය", "phone-label": "දුරකථන අංකය", "town-label": "නගරය", "logout": "පිටවීම",
+        "subtitle": "ආනන්ද ශාස්ත්‍රාලය මාධ්‍ය ඒකකය",
+        "nav-home": "මුල් පිටුව", "nav-about": "අපි ගැන", "nav-stats": "සංඛ්‍යාලේඛන", "nav-event": "උත්සවය", "nav-gallery": "ගැලරිය", "nav-sections": "අංශ", "nav-contact": "සම්බන්ධතා",
+        "welcome-badge": "ශාස්ත්‍රාලියාගේ මාධ්‍යයට සාදරයෙන් පිළිගනිමු",
+        "hero-title": "ආනන්ද ශාස්ත්‍රාලය<br>මාධ්‍ය ඒකකය",
+        "hero-desc": "ආනන්ද ශාස්ත්‍රාලයේ නිල මාධ්‍ය ඒකකය, මොහොතුන් අල්ලා ගැනීමට, කතානන්දර බෙදා හැරීමට, සහ නිර්මාණාත්මක ඩිජිටල් අන්තර්ගතය හරහා අපගේ පාසල් ප්‍රජාව සම්බන්ධ කිරීමට කැපවී සිටී.",
+        "explore": "අංශ ගවේෂණය කරන්න", "next-event": "ඊළඟ උත්සවය",
+        "youtube-subs": "YouTube දායකයින්", "fb-followers": "FB අනුගාමිකයින්", "wa-followers": "WA අනුගාමිකයින්",
+        "about-badge": "අපි ගැන", "about-title": "අපි කවුද", "about-subtitle": "ශාස්ත්‍රාලියාගේ මාධ්‍ය ඒකකය",
+        "about-desc1": "ASMU (ආනන්ද ශාස්ත්‍රාලය මාධ්‍ය ඒකකය) අපගේ පාසලේ ඩිජිටල් පැවැත්මේ හදවතයි. අපි පාසල් ජීවිතය ලේඛනගත කිරීමට, ආකර්ෂණීය අන්තර්ගතය නිර්මාණය කිරීමට, සහ ශක්තිමත් මාර්ගගත ප්‍රජාවක් ගොඩනැගීමට කැපවූ ශිෂ්‍ය කණ්ඩායමකි.",
+        "about-desc2": "පාසල් උත්සව සහ ක්‍රීඩා දින වැඩසටහන් ආවරණය කිරීමේ සිට නිර්මාණාත්මක reels සහ විකාශයන් නිපදවීම දක්වා, අපි සෑම මතක සටහනක්ම අල්ලා ගෙන ලෝකයට බෙදා හරිමු. අපගේ මෙහෙවර ආනන්ද ශාස්ත්‍රාලයේ ජීවංකාරී ආත්මය ප්‍රදර්ශනය කිරීමයි.",
+        "mission": "අපගේ මෙහෙවර", "mission-desc": "සෑම පාසල් මොහොතක්ම අල්ලා ගෙන බෙදා හැරීම",
+        "vision": "අපගේ දැක්ම", "vision-desc": "හොඳම පාසල් මාධ්‍ය ඒකකය වීම",
+        "learn-more": "මාධ්‍යය ගැන තවත් දැනගන්න",
+        "stats-badge": "අපගේ පැතිරීම", "stats-title": "අපගේ සමාජ පැවැත්ම",
+        "youtube": "YouTube දායකයින්", "facebook": "Facebook අනුගාමිකයින්", "whatsapp": "WhatsApp අනුගාමිකයින්",
+        "visit-yt": "නාලිකාව посетить", "visit-fb": "පිටුව посетить", "join-wa": "නාලිකාවට සම්බන්ධ වන්න",
+        "event-badge": "ඉදිරියට", "event-title": "ඊළඟ උත්සවය", "event-name": "නිකිණි පුර පෝය දිනය", "event-desc": "ආනන්ද ශාස්ත්‍රාලයේ නිකිණි පුර පෝය දිනය සැමරීම සඳහා වන වාර්ෂික බෞද්ධ ආගමික උත්සවය සහ සංස්කෘතික වැඩසටහන්.",
+        "countdown-title": "උත්සව ගණනය", "countdown-desc": "නිකිණි පුර පෝය දින සැමරුම දක්වා ඉතිරි වේලාව",
+        "days": "දින", "hours": "පැය", "minutes": "මිනිත්තු", "seconds": "තත්පර",
+        "start-date": "ආරම්භය: 2026 අගෝස්තු 27 දින පෙ.ව. 12:00", "end-date": "අවසානය: 2026 අගෝස්තු 27 දින පෙ.ව. 12:00",
+        "remind-me": "මතක් කරන්න",
+        "gallery-badge": "ගැලරිය", "gallery-title": "අපගේ මතකයන්", "gallery-desc": "අපගේ පාසල් ගමනේ සුන්දර මොහොතුන් අල්ලා ගැනීම",
+        "sections-badge": "ගවේෂණය", "sections-title": "අපගේ අංශ", "sections-desc": "අප නිර්මාණය කරන සියලුම වේදිකා සහ අන්තර්ගතය සොයා ගන්න",
+        "reels-title": "Reels", "reels-desc": "නිර්මාණාත්මක ආකාරයෙන් පාසල් ජීවිතය සහ උත්සව ප්‍රදර්ශනය කරන කෙටි වීඩියෝ අන්තර්ගතය.", "watch-reels": "Reels නරඹන්න",
+        "broadcast-title": "විකාශය", "broadcast-desc": "පාසල් නිවේදන, උත්සව සහ විශේෂ වැඩසටහන් සජීවි සහ පටිගත කළ විකාශයන්.", "watch-broadcast": "විකාශය නරඹන්න",
+        "aboutmedia-title": "මාධ්‍යය ගැන", "aboutmedia-desc": "අපගේ මාධ්‍ය ඒකකය, කණ්ඩායමේ සාමාජිකයින්, සහ ASMU පිටුපස කතාව ගැන දැනගන්න.",
+        "schoolprofile-title": "පාසල් පැතිකඩ", "schoolprofile-desc": "ආනන්ද ශාස්ත්‍රාලයේ ඉතිහාසය, ජයග්‍රහණ සහ පැතිකඩ ගවේෂණය කරන්න.", "view-profile": "පැතිකඩ බලන්න",
+        "comments-title": "ප්‍රතිචාර", "comments-desc": "ASMU ප්‍රජාව සමඟ ඔබගේ අදහස් බෙදා ගන්න.", "view-comments": "ප්‍රතිචාර බලන්න",
+        "report-title": "වාර්තා කරන්න", "report-desc": "වැඩිදියුණු කිරීමට අපට උදව් කිරීමට ගැටලු, යෝජනා හෝ තැනැත්තා වාර්තා කරන්න.", "report-now": "දැන් වාර්තා කරන්න",
+        "touchus-title": "අපට සම්බන්ධ වන්න", "touchus-desc": "සහයෝගිතා සහ හවුල්කාරිත්ව සඳහා අප සමඟ සම්බන්ධ වන්න.", "contact-us": "අපට සම්බන්ධ වන්න",
+        "latestnews-title": "නවතම ප්‍රවෘත්ති", "latestnews-desc": "ASMU වෙතින් නවතම ප්‍රවෘත්ති සහ නිවේදන වලින් යාවත්කාලීනව සිටින්න.", "read-news": "ප්‍රවෘත්ති කියවන්න",
+        "latestposts-title": "නවතම පළකිරීම්", "latestposts-desc": "පාසල් ජීවිතය ගැන අපගේ නවතම බ්ලොග් පළකිරීම් සහ ලිපි පරීක්ෂා කරන්න.", "read-posts": "පළකිරීම් කියවන්න",
+        "livestream-title": "සජීවි විකාශය", "livestream-desc": "පාසල් උත්සව සහ විශේෂ වැඩසටහන් සජීවි විකාශයන් නරඹන්න.", "watch-live": "සජීවිව නරඹන්න",
+        "join-media-title": "මාධ්‍යයට සම්බන්ධ වන්න", "join-media-desc": "ASMU කණ්ඩායමේ සාමාජිකයෙකු වීමට අයදුම් කර අපගේ පාසල් මාධ්‍ය ව්‍යාපෘති වලට දායක වන්න.",
+        "aboutmedia-dev-title": "මාධ්‍යය ගැන (Dev)", "aboutmedia-dev-desc": "නව විශේෂාංග සහ යාවත්කාලීන කිරීම් සමඟ මාධ්‍යය ගැන සංවර්ධක අනුවාදය.",
+        "aboutdevs-title": "සංවර්ධකයින් ගැන", "aboutdevs-desc": "ASMU ඩිජිටල් වේදිකාව පිටුපස දක්ෂ සංවර්ධකයින් හමුවන්න.", "meet-team": "කණ්ඩායම හමුවන්න",
+        "contact-badge": "සම්බන්ධතා", "contact-title": "සම්බන්ධ වන්න", "contact-desc": "සහයෝගිතා, විමසීම් සහ හෙලෝවක් කියන්න අප හා සම්බන්ධ වන්න",
+        "sent-success": "සාර්ථකව යවන ලදී!", "thank-you": "අප හා සම්බන්ධ වීමට ස්තුතියි",
+        "contact-info": "සම්බන්ධතා තොරතුරු", "contact-name": "නම", "contact-subject": "විෂය", "contact-message": "පණිවිඩය", "send-message": "පණිවිඩය යවන්න",
+        "footer-desc": "නිර්මාණාත්මක ඩිජිටල් අන්තර්ගතය හරහා ආනන්ද ශාස්ත්‍රාලයේ ජීවංකාරී ආත්මය අල්ලා ගැනීමට සහ බෙදා හැරීමට කැපවූ නිල මාධ්‍ය ඒකකය.",
+        "quick-links": "ඉක්මන් සම්බන්ධතා", "useful-links": "ප්‍රයෝජනවත් සම්බන්ධතා"
+    },
+    ta: {
+        "login": "உள்நுழைய", "login-desc": "உங்கள் ASMU கணக்கில் உள்நுழைய", "username": "பயனர்பெயர்", "password": "கடவுச்சொல்",
+        "login-btn": "உள்நுழைய", "no-account": "கணக்கு இல்லையா?", "create-account-link": "கணக்கை உருவாக்கு",
+        "register-desc": "உங்கள் ASMU கணக்கை உருவாக்குங்கள்", "profile-photo": "சுயவிவர புகைப்படம்", "full-name": "முழு பெயர்",
+        "create-btn": "கணக்கை உருவாக்கு", "have-account": "ஏற்கனவே கணக்கு உள்ளதா?", "login-link": "உள்நுழைய",
+        "select-role": "உங்கள் பங்கைத் தேர்ந்தெடுக்கவும்", "role-teacher": "ஆசிரியர்", "role-student": "மாணவர்", "role-public": "பொதுமக்கள்",
+        "school": "பள்ளி", "index": "சுட்டெண்", "phone": "தொலைபேசி எண்", "town": "நகரம்",
+        "index-label": "சுட்டெண்", "phone-label": "தொலைபேசி எண்", "town-label": "நகரம்", "logout": "வெளியேறு",
+        "subtitle": "ஆனந்த சாஸ்திராலயா ஊடகப் பிரிவு",
+        "nav-home": "முகப்பு", "nav-about": "எங்களைப் பற்றி", "nav-stats": "புள்ளிவிவரங்கள்", "nav-event": "நிகழ்வு", "nav-gallery": "காட்சியகம்", "nav-sections": "பிரிவுகள்", "nav-contact": "தொடர்பு",
+        "welcome-badge": "சாஸ்திராலியனின் ஊடகத்திற்கு வரவேற்கிறோம்",
+        "hero-title": "ஆனந்த சாஸ்திராலயா<br>ஊடகப் பிரிவு",
+        "hero-desc": "ஆனந்த சாஸ்திராலயாவின் அதிகாரப்பூர்வ ஊடகப் பிரிவு, தருணங்களைப் பிடிப்பதற்கும், கதைகளைப் பகிர்வதற்கும், மற்றும் படைப்பாற்றல் டிஜிட்டல் உள்ளடக்கம் மூலம் எங்கள் பள்ளி சமூகத்தை இணைப்பதற்கும் அர்ப்பணிக்கப்பட்டுள்ளது.",
+        "explore": "பிரிவுகளை ஆராயுங்கள்", "next-event": "அடுத்த நிகழ்வு",
+        "youtube-subs": "YouTube சந்தாதாரர்கள்", "fb-followers": "FB பின்தொடர்பவர்கள்", "wa-followers": "WA பின்தொடர்பவர்கள்",
+        "about-badge": "எங்களைப் பற்றி", "about-title": "நாங்கள் யார்", "about-subtitle": "சாஸ்திராலியனின் ஊடகப் பிரிவு",
+        "about-desc1": "ASMU (ஆனந்த சாஸ்திராலயா ஊடகப் பிரிவு) எங்கள் பள்ளியின் டிஜிட்டல் இருப்பின் இதயத் துடிப்பு ஆகும். பள்ளி வாழ்க்கையை ஆவணப்படுத்துவதற்கும், ஈர்க்கும் உள்ளடக்கத்தை உருவாக்குவதற்கும், மற்றும் வலுவான ஆன்லைன் சமூகத்தைக் கட்டியெழுப்புவதற்கும் அர்ப்பணிக்கப்பட்ட மாணவர்கள் குழு.",
+        "about-desc2": "பள்ளி நிகழ்வுகள் மற்றும் விளையாட்டு நாட்களை உள்ளடக்கியது முதல் படைப்பாற்றல் reels மற்றும் ஒளிபரப்புகளை உருவாக்குவது வரை, ஒவ்வொரு மறக்கமுடியாத தருணத்தையும் பிடித்து உலகத்துடன் பகிர்வதை உறுதி செய்கிறோம். எங்கள் இலக்கு ஆனந்த சாஸ்திராலயாவின் வாழ்வார்ந்த ஆவியைக் காட்டுவது.",
+        "mission": "எங்கள் இலக்கு", "mission-desc": "ஒவ்வொரு பள்ளி தருணத்தையும் பிடித்து பகிர்வது",
+        "vision": "எங்கள் கனவு", "vision-desc": "சிறந்த பள்ளி ஊடகப் பிரிவாக இருப்பது",
+        "learn-more": "ஊடகம் பற்றி மேலும் அறிய",
+        "stats-badge": "எஙள் பரவல்", "stats-title": "எஙள் சமூக இருப்பு",
+        "youtube": "YouTube சந்தாதாரர்கள்", "facebook": "Facebook பின்தொடர்பவர்கள்", "whatsapp": "WhatsApp பின்தொடர்பவர்கள்",
+        "visit-yt": "சேனலைப் பார்வையிடுங்கள்", "visit-fb": "பக்கத்தைப் பார்வையிடுங்கள்", "join-wa": "சேனலில் இணையுங்கள்",
+        "event-badge": "வரவிருக்கும்", "event-title": "அடுத்த நிகழ்வு", "event-name": "நிக்கினி பௌர்ணமி போயா தினம்", "event-desc": "ஆனந்த சாஸ்திராலயாவில் நிக்கினி பௌர்ணமி போயா தினத்தை கொண்டாடும் வாராந்திர பௌத்த மத நிகழ்வு மற்றும் கலாச்சார நிகழ்ச்சிகள்.",
+        "countdown-title": "நிகழ்வு கணக்கீடு", "countdown-desc": "நிக்கினி பௌர்ணமி போயா தினக் கொண்டாட்டம் வரை மீதமுள்ள நேரம்",
+        "days": "நாட்கள்", "hours": "மணிகள்", "minutes": "நிமிடங்கள்", "seconds": "வினாடிகள்",
+        "start-date": "தொடக்கம்: ஆகஸ்ட் 27, 2026 மதியம் 12:00", "end-date": "முடிவு: ஆகஸ்ட் 27, 2026 நள்ளிரவு 12:00",
+        "remind-me": "என்னை நினைவூட்டு",
+        "gallery-badge": "காட்சியகம்", "gallery-title": "எஙள் நினைவுகள்", "gallery-desc": "எஙள் பள்ளி பயணத்தின் அழகான தருணங்களைப் பிடிப்பது",
+        "sections-badge": "ஆராயுங்கள்", "sections-title": "எஙள் பிரிவுகள்", "sections-desc": "நாஙள் உருவாக்கும் அனைத்து தளங்கள் மற்றும் உள்ளடக்கத்தைக் கண்டறியுங்கள்",
+        "reels-title": "Reels", "reels-desc": "பள்ளி வாழ்க்கை மற்றும் நிகழ்வுகளைப் படைப்பாற்றல் வழியில் காட்டும் குறுகிய வீடியோ உள்ளடக்கம்.", "watch-reels": "Reels-ஐப் பாருங்கள்",
+        "broadcast-title": "ஒளிபரப்பு", "broadcast-desc": "பள்ளி அறிவிப்புகள், நிகழ்வுகள் மற்றும் சிறப்பு நிகழ்ச்சிகளின் நேரடி மற்றும் பதிவுசெய்யப்பட்ட ஒளிபரப்புகள்.", "watch-broadcast": "ஒளிபரப்பைப் பாருங்கள்",
+        "aboutmedia-title": "ஊடகம் பற்றி", "aboutmedia-desc": "எஙள் ஊடகப் பிரிவு, குழு உறுப்பினர்கள், மற்றும் ASMU-வின் பின்னணி கதை பற்றி அறியுங்கள்.",
+        "schoolprofile-title": "பள்ளி சுயவிவரம்", "schoolprofile-desc": "ஆனந்த சாஸ்திராலயாவின் வரலாறு, சாதனைகள், மற்றும் சுயவிவரத்தை ஆராயுங்கள்.", "view-profile": "சுயவிவரத்தைப் பாருங்கள்",
+        "comments-title": "கருத்துகள்", "comments-desc": "ASMU சமூகத்துடன் உங்கள் எண்ணங்களைப் பகிர்ந்து கொள்ளுங்கள்.", "view-comments": "கருத்துகளைப் பாருங்கள்",
+        "report-title": "புகார்", "report-desc": "மேம்படுத்த எங்களுக்கு உதவ சிக்கல்கள், பரிந்துரைகள் அல்லது கவலைகளைப் புகாரளிக்கவும்.", "report-now": "இப்போது புகாரளிக்கவும்",
+        "touchus-title": "எங்களைத் தொடர்பு கொள்ளுங்கள்", "touchus-desc": "கூட்டுறவு மற்றும் கூட்டாண்மைகளுக்கு எங்களைத் தொடர்பு கொள்ளுங்கள்.", "contact-us": "தொடர்பு கொள்ளுங்கள்",
+        "latestnews-title": "சமீபத்திய செய்திகள்", "latestnews-desc": "ASMU இலிருந்து சமீபத்திய செய்திகள் மற்றும் அறிவிப்புகளுடன் புதுப்பிக்கப்பட்டிருங்கள்.", "read-news": "செய்திகளைப் படிக்கவும்",
+        "latestposts-title": "சமீபத்திய இடுகைகள்", "latestposts-desc": "பள்ளி வாழ்க்கை பற்றிய எங்களின் சமீபத்திய வலைப்பதிவு இடுகைகள் மற்றும் கட்டுரைகளைப் பார்க்கவும்.", "read-posts": "இடுகைகளைப் படிக்கவும்",
+        "livestream-title": "நேரடி ஒளிபரப்பு", "livestream-desc": "பள்ளி நிகழ்வுகள் மற்றும் சிறப்பு நிகழ்ச்சிகளின் நேரடி ஒளிபரப்புகளைப் பார்க்கவும்.", "watch-live": "நேரடியாகப் பாருங்கள்",
+        "join-media-title": "ஊடகத்தில் இணையுங்கள்", "join-media-desc": "ASMU குழுவின் உறுப்பினராக விண்ணப்பித்து எங்கள் பள்ளி ஊடக திட்டங்களுக்கு பங்களிக்கவும்.",
+        "aboutmedia-dev-title": "ஊடகம் பற்றி (Dev)", "aboutmedia-dev-desc": "புதிய அம்சங்கள் மற்றும் புதுப்பிப்புகளுடன் ஊடகம் பற்றிய மேம்பாட்டாளர் பதிப்பு.",
+        "aboutdevs-title": "மேம்பாட்டாளர்கள் பற்றி", "aboutdevs-desc": "ASMU டிஜிட்டல் தளத்தின் பின்னால் உள்ள திறமையான மேம்பாட்டாளர்களை சந்திக்கவும்.", "meet-team": "குழுவை சந்திக்கவும்",
+        "contact-badge": "தொடர்பு", "contact-title": "தொடர்பு கொள்ளுங்கள்", "contact-desc": "கூட்டுறவுகள், விசாரணைகள், அல்லது வணக்கம் சொல்வதற்கு எங்களைத் தொடர்பு கொள்ளுங்கள்",
+        "sent-success": "வெற்றிகரமாக அனுப்பப்பட்டது!", "thank-you": "எங்களைத் தொடர்பு கொண்டதற்கு நன்றி",
+        "contact-info": "தொடர்பு தகவல்", "contact-name": "பெயர்", "contact-subject": "தலைப்பு", "contact-message": "செய்தி", "send-message": "செய்தி அனுப்புங்கள்",
+        "footer-desc": "படைப்பாற்றல் டிஜிட்டல் உள்ளடக்கம் மூலம் ஆனந்த சாஸ்திராலயாவின் வாழ்வார்ந்த ஆவியைப் பிடித்து பகிர்வதற்கு அர்ப்பணிக்கப்பட்ட அதிகாரப்பூர்வ ஊடகப் பிரிவு.",
+        "quick-links": "விரைவு இணைப்புகள்", "useful-links": "பயனுள்ள இணைப்புகள்"
+    }
+};
+
+let currentLanguage = 'en';
+
+// ===== LANGUAGE SWITCHER =====
+function toggleLangDropdown(e) {
+    e.stopPropagation();
+    const menu = document.getElementById('langDropdownMenu');
+    menu.classList.toggle('open');
+}
+
+function changeLanguage(lang, event) {
+    if (event) event.stopPropagation();
+    currentLanguage = lang;
+
+    // Update current language display
+    const flagEl = document.getElementById('currentLangFlag');
+    const textEl = document.getElementById('currentLangText');
+
+    if (lang === 'en') {
+        flagEl.textContent = 'EN';
+        flagEl.style.background = 'linear-gradient(135deg, #3b82f6, #1d4ed8)';
+        textEl.textContent = 'English';
+    } else if (lang === 'si') {
+        flagEl.textContent = 'SI';
+        flagEl.style.background = 'linear-gradient(135deg, #f97316, #ea580c)';
+        textEl.textContent = 'සිංහල';
+    } else if (lang === 'ta') {
+        flagEl.textContent = 'TA';
+        flagEl.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+        textEl.textContent = 'தமிழ்';
+    }
+
+    // Update dropdown active state
+    document.querySelectorAll('.lang-dropdown-item').forEach(el => {
+        el.classList.remove('active');
+        if (el.getAttribute('data-lang-item') === lang) {
+            el.classList.add('active');
+        }
+    });
+
+    // Close dropdown
+    document.getElementById('langDropdownMenu').classList.remove('open');
+
+    // Apply translations
+    applyTranslations(lang);
+
+    localStorage.setItem('asmu-language', lang);
+}
+
+function applyTranslations(lang) {
+    const t = translations[lang];
+    document.querySelectorAll('[data-lang]').forEach(el => {
+        const key = el.getAttribute('data-lang');
+        if (t[key]) {
+            el.innerHTML = t[key];
+        }
+    });
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    const switcher = document.getElementById('langSwitcher');
+    const menu = document.getElementById('langDropdownMenu');
+    if (switcher && !switcher.contains(e.target)) {
+        menu.classList.remove('open');
+    }
+});
+
+// ===== VALIDATION HELPERS =====
+function isDigitOnly(event) {
+    const char = String.fromCharCode(event.which || event.keyCode);
+    const regex = /^[0-9]$/;
+    if (!regex.test(char)) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
+
+function validatePhoneNumber(input) {
+    input.value = input.value.replace(/[^0-9]/g, '');
+    if (input.value.length > 0) {
+        document.getElementById('phoneError').classList.add('hidden');
+    }
+}
+
+function validateIndexNumber(input) {
+    input.value = input.value.replace(/[^0-9]/g, '');
+    if (input.value.length > 0) {
+        document.getElementById('indexError').classList.add('hidden');
+    }
+}
+
+function validateUsername(input) {
+    const value = input.value;
+    const regex = /^[a-z0-9_-]*$/;
+    if (!regex.test(value)) {
+        input.value = value.replace(/[^a-z0-9_-]/g, '');
+        document.getElementById('usernameError').classList.remove('hidden');
+    } else {
+        document.getElementById('usernameError').classList.add('hidden');
+    }
+}
+
+function toggleNoIndex(checkbox) {
+    const indexInput = document.getElementById('registerIndex');
+    const indexError = document.getElementById('indexError');
+    if (checkbox.checked) {
+        indexInput.value = '';
+        indexInput.disabled = true;
+        indexInput.classList.add('bg-gray-100', 'dark:bg-gray-700', 'cursor-not-allowed');
+        indexInput.placeholder = 'Not applicable';
+        indexError.classList.add('hidden');
+    } else {
+        indexInput.disabled = false;
+        indexInput.classList.remove('bg-gray-100', 'dark:bg-gray-700', 'cursor-not-allowed');
+        indexInput.placeholder = 'Enter index number';
+    }
+}
+
+// ===== LOGIN SYSTEM =====
+function showLogin() {
+    document.getElementById('loginForm').classList.remove('hidden');
+    document.getElementById('registerForm').classList.add('hidden');
+    document.getElementById('profileView').classList.add('hidden');
+    document.getElementById('modalTitle').textContent = translations[currentLanguage]['login'];
+    // Reset register form state
+    document.getElementById('noIndexCheckbox').checked = false;
+    document.getElementById('registerIndex').disabled = false;
+    document.getElementById('registerIndex').classList.remove('bg-gray-100', 'dark:bg-gray-700', 'cursor-not-allowed');
+    document.getElementById('registerIndex').placeholder = 'Enter index number';
+    document.getElementById('usernameError').classList.add('hidden');
+    document.getElementById('phoneError').classList.add('hidden');
+    document.getElementById('indexError').classList.add('hidden');
+}
+
+function showRegister() {
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('registerForm').classList.remove('hidden');
+    document.getElementById('profileView').classList.add('hidden');
+    document.getElementById('modalTitle').textContent = translations[currentLanguage]['create-account-link'];
+}
+
+function selectRole(el, role) {
+    document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('registerRole').value = role;
+}
+
+function previewRegisterPhoto(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('registerPhotoPreview').src = e.target.result;
+            document.getElementById('registerPhotoPreview').classList.remove('hidden');
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function showLoading(text, subtext) {
+    document.getElementById('loadingText').textContent = text || 'Please wait...';
+    document.getElementById('loadingSubtext').textContent = subtext || '';
+    document.getElementById('loadingOverlay').classList.add('active');
+}
+
+function hideLoading() {
+    document.getElementById('loadingOverlay').classList.remove('active');
+}
+
+function registerUser(e) {
+    e.preventDefault();
+
+    const role = document.getElementById('registerRole').value;
+    if (!role) {
+        alert(translations[currentLanguage]['select-role'] + '!');
+        return;
+    }
+
+    // Validate username
+    const usernameInput = document.getElementById('registerUsername');
+    const usernameValue = usernameInput.value.trim();
+    const usernameRegex = /^[a-z0-9_-]+$/;
+    if (!usernameRegex.test(usernameValue)) {
+        document.getElementById('usernameError').classList.remove('hidden');
+        usernameInput.focus();
+        return;
+    } else {
+        document.getElementById('usernameError').classList.add('hidden');
+    }
+
+    // Validate index number (only if checkbox is not checked)
+    const noIndexChecked = document.getElementById('noIndexCheckbox').checked;
+    const indexInput = document.getElementById('registerIndex');
+    if (!noIndexChecked) {
+        const indexValue = indexInput.value.trim();
+        if (!/^\d+$/.test(indexValue)) {
+            document.getElementById('indexError').classList.remove('hidden');
+            indexInput.focus();
+            return;
+        } else {
+            document.getElementById('indexError').classList.add('hidden');
+        }
+    }
+
+    // Validate phone number
+    const phoneInput = document.getElementById('registerNumber');
+    const phoneValue = phoneInput.value.trim();
+    if (!/^\d+$/.test(phoneValue)) {
+        document.getElementById('phoneError').classList.remove('hidden');
+        phoneInput.focus();
+        return;
+    } else {
+        document.getElementById('phoneError').classList.add('hidden');
+    }
+
+    const photoInput = document.getElementById('registerPhotoInput');
+    const name = document.getElementById('registerName').value;
+    const username = document.getElementById('registerUsername').value;
+    const password = document.getElementById('registerPassword').value;
+    const school = document.getElementById('registerSchool').value;
+    const index = document.getElementById('noIndexCheckbox').checked ? 'N/A' : document.getElementById('registerIndex').value;
+    const number = document.getElementById('registerNumber').value;
+    const email = document.getElementById('registerEmail').value;
+    const town = document.getElementById('registerTown').value;
+
+    // Check if username already exists
+    const existingUsers = JSON.parse(localStorage.getItem('asmu_users') || '[]');
+    if (existingUsers.find(u => u.username === username)) {
+        alert('Username already exists! Please choose another.');
+        return;
+    }
+
+    // Show loading for 6 seconds
+    showLoading(
+        translations[currentLanguage]['create-btn'] + '...',
+        'Please wait a moment'
+    );
+
+    setTimeout(() => {
+        const userData = {
+            name: name, username: username, password: password,
+            role: role, school: school, index: index,
+            number: number, email: email, town: town, photo: ''
+        };
+
+        if (photoInput.files && photoInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                userData.photo = evt.target.result;
+                finalizeRegistration(userData);
+            };
+            reader.readAsDataURL(photoInput.files[0]);
+        } else {
+            finalizeRegistration(userData);
+        }
+    }, 6000);
+}
+
+function finalizeRegistration(userData) {
+    const users = JSON.parse(localStorage.getItem('asmu_users') || '[]');
+    users.push(userData);
+    localStorage.setItem('asmu_users', JSON.stringify(users));
+    localStorage.setItem('asmu_current_user', userData.username);
+
+    hideLoading();
+    alert('Account created successfully! You are now logged in.');
+    showProfileView();
+    updateNavProfile();
+    document.getElementById('registerFormElement').reset();
+    document.getElementById('registerPhotoPreview').classList.add('hidden');
+    document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('selected'));
+    document.getElementById('noIndexCheckbox').checked = false;
+    document.getElementById('registerIndex').disabled = false;
+    document.getElementById('registerIndex').classList.remove('bg-gray-100', 'dark:bg-gray-700', 'cursor-not-allowed');
+    document.getElementById('registerIndex').placeholder = 'Enter index number';
+    document.getElementById('usernameError').classList.add('hidden');
+    document.getElementById('phoneError').classList.add('hidden');
+    document.getElementById('indexError').classList.add('hidden');
+}
+
+function loginUser(e) {
+    e.preventDefault();
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
+
+    const users = JSON.parse(localStorage.getItem('asmu_users') || '[]');
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+        localStorage.setItem('asmu_current_user', username);
+        alert('Login successful! Welcome back, ' + user.name);
+        showProfileView();
+        updateNavProfile();
+        document.getElementById('loginFormElement').reset();
+    } else {
+        alert('Invalid username or password! Please try again.');
+    }
+}
+
+function showProfileView() {
+    const currentUsername = localStorage.getItem('asmu_current_user');
+    if (!currentUsername) { showLogin(); return; }
+
+    const users = JSON.parse(localStorage.getItem('asmu_users') || '[]');
+    const user = users.find(u => u.username === currentUsername);
+    if (!user) { showLogin(); return; }
+
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('registerForm').classList.add('hidden');
+    document.getElementById('profileView').classList.remove('hidden');
+    document.getElementById('modalTitle').textContent = 'My Profile';
+
+    document.getElementById('profileName').textContent = user.name;
+    document.getElementById('profileSchool').textContent = user.school;
+    document.getElementById('profileIndex').textContent = user.index;
+    document.getElementById('profileNumber').textContent = user.number;
+    document.getElementById('profileEmail').textContent = user.email;
+    document.getElementById('profileTown').textContent = user.town;
+
+    const roleLabels = { teacher: 'Teacher', student: 'Student', public: 'Public' };
+    const roleLabelsSi = { teacher: 'ගුරුවරයා', student: 'ශිෂ්‍යයා', public: 'ජනතාව' };
+    const roleLabelsTa = { teacher: 'ஆசிரியர்', student: 'மாணவர்', public: 'பொதுமக்கள்' };
+
+    let roleText = roleLabels[user.role] || user.role;
+    if (currentLanguage === 'si') roleText = roleLabelsSi[user.role] || user.role;
+    if (currentLanguage === 'ta') roleText = roleLabelsTa[user.role] || user.role;
+
+    document.getElementById('profileRole').textContent = roleText;
+
+    if (user.photo) {
+        document.getElementById('profilePhoto').src = user.photo;
+    } else {
+        document.getElementById('profilePhoto').src = 'https://i.postimg.cc/XYHPqHbB/Whats-App-Image-2026-07-11-at-12-46-34-AM.jpg';
+    }
+}
+
+function logoutUser() {
+    localStorage.removeItem('asmu_current_user');
+    alert('Logged out successfully!');
+    showLogin();
+    updateNavProfile();
+}
+
+function updateNavProfile() {
+    const currentUsername = localStorage.getItem('asmu_current_user');
+    const profileIcon = document.getElementById('profileIcon');
+    const navProfileImg = document.getElementById('navProfileImg');
+
+    if (currentUsername) {
+        const users = JSON.parse(localStorage.getItem('asmu_users') || '[]');
+        const user = users.find(u => u.username === currentUsername);
+        if (user && user.photo) {
+            profileIcon.classList.add('hidden');
+            navProfileImg.src = user.photo;
+            navProfileImg.classList.remove('hidden');
+        } else {
+            profileIcon.classList.remove('hidden');
+            navProfileImg.classList.add('hidden');
+        }
+    } else {
+        profileIcon.classList.remove('hidden');
+        navProfileImg.classList.add('hidden');
+    }
+}
+
+function openProfileModal() {
+    document.getElementById('profileModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    const currentUsername = localStorage.getItem('asmu_current_user');
+    if (currentUsername) { showProfileView(); } else { showLogin(); }
+}
+
+function closeProfileModal() {
+    document.getElementById('profileModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// ===== CONTACT FORM =====
+function submitContact(e) {
+    e.preventDefault();
+
+    // Show success message
+    document.getElementById('contactSubmitBtn').classList.add('hidden');
+    document.getElementById('contactSuccess').classList.remove('hidden');
+
+    // Auto reset after 4 seconds
+    setTimeout(() => {
+        document.getElementById('contactSuccess').classList.add('hidden');
+        document.getElementById('contactSubmitBtn').classList.remove('hidden');
+        e.target.reset();
+    }, 4000);
+}
+
+// ===== THEME =====
+function toggleTheme() {
+    document.documentElement.classList.toggle('dark');
+    const isDark = document.documentElement.classList.contains('dark');
+    localStorage.setItem('asmu-theme', isDark ? 'dark' : 'light');
+}
+
+function toggleMobileMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ===== SMOOTH SCROLL =====
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        const navbarHeight = 80;
+        const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+        window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+    }
+    document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// ===== ACTIVE NAV =====
+function updateActiveNav() {
+    const sections = ['home', 'about', 'stats', 'event', 'gallery', 'sections', 'contact'];
+    const navbarHeight = 100;
+    let current = 'home';
+    sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= navbarHeight && rect.bottom >= navbarHeight) {
+                current = sectionId;
+            }
+        }
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('onclick') && link.getAttribute('onclick').includes("'" + current + "'")) {
+            link.classList.add('active');
+        }
+    });
+}
+window.addEventListener('scroll', updateActiveNav);
+
+// ===== IMAGE VIEWER =====
+function openImageViewer(src) {
+    document.getElementById('viewerImage').src = src;
+    document.getElementById('imageViewer').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeImageViewer() {
+    document.getElementById('imageViewer').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// ===== COUNTDOWN =====
+function updateCountdown() {
+    const eventDate = new Date('2026-08-27T12:00:00');
+    const now = new Date();
+    const diff = eventDate - now;
+    if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// ===== COUNTER =====
+function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-count'));
+    const duration = 2000;
+    const startTime = performance.now();
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(target * easeOut);
+        if (target >= 1000) {
+            el.textContent = (current / 1000).toFixed(target >= 10000 ? 1 : 2) + 'K';
+        } else {
+            el.textContent = current;
+        }
+        if (progress < 1) { requestAnimationFrame(update); }
+        else {
+            if (target >= 1000) { el.textContent = (target / 1000).toFixed(target >= 10000 ? 1 : 2) + 'K'; }
+            else { el.textContent = target; }
+        }
+    }
+    requestAnimationFrame(update);
+}
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            if (entry.target.querySelector('.stat-number')) {
+                entry.target.querySelectorAll('.stat-number').forEach(animateCounter);
+            }
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== NAVBAR SHADOW =====
+window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 50) { navbar.classList.add('shadow-lg'); }
+    else { navbar.classList.remove('shadow-lg'); }
+});
+
+// ===== PARTICLES =====
+function createParticles() {
+    const container = document.getElementById('particles');
+    if (!container) return;
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = (5 + Math.random() * 10) + 's';
+        container.appendChild(particle);
+    }
+}
+
+function addToCalendar() {
+    alert('Event reminder set! We will notify you when the event is near.');
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('asmu-theme');
+    if (savedTheme === 'dark') { document.documentElement.classList.add('dark'); }
+    else { document.documentElement.classList.remove('dark'); }
+
+    const savedLang = localStorage.getItem('asmu-language') || 'en';
+    currentLanguage = savedLang;
+
+    // Update flag and text
+    const flagEl = document.getElementById('currentLangFlag');
+    const textEl = document.getElementById('currentLangText');
+    if (savedLang === 'en') {
+        flagEl.textContent = 'EN'; flagEl.style.background = 'linear-gradient(135deg, #3b82f6, #1d4ed8)';
+        textEl.textContent = 'English';
+    } else if (savedLang === 'si') {
+        flagEl.textContent = 'SI'; flagEl.style.background = 'linear-gradient(135deg, #f97316, #ea580c)';
+        textEl.textContent = 'සිංහල';
+    } else if (savedLang === 'ta') {
+        flagEl.textContent = 'TA'; flagEl.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+        textEl.textContent = 'தமிழ்';
+    }
+
+    // Update dropdown active state
+    document.querySelectorAll('.lang-dropdown-item').forEach(el => {
+        el.classList.remove('active');
+        if (el.getAttribute('data-lang-item') === savedLang) {
+            el.classList.add('active');
+        }
+    });
+
+    applyTranslations(savedLang);
+    updateNavProfile();
+    createParticles();
+    updateActiveNav();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeImageViewer();
+        closeProfileModal();
+        document.getElementById('mobileMenu').classList.remove('open');
+        document.getElementById('langDropdownMenu').classList.remove('open');
+    }
+});
+</script>
+</body>
+</html>
